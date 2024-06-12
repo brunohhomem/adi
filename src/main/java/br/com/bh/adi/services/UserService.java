@@ -1,6 +1,7 @@
 package br.com.bh.adi.services;
 
 import br.com.bh.adi.controllers.CreateUserDTO;
+import br.com.bh.adi.controllers.UpdateUserDTO;
 import br.com.bh.adi.entities.User;
 import br.com.bh.adi.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,27 @@ public class UserService {
 
     public List<User> listUsers() {
         return  userRepository.findAll();
+    }
+
+    public void updateUserById(String userId, UpdateUserDTO updateUserDTO){
+        var id = UUID.fromString(userId);
+
+        var userEntity = userRepository.findById(id);
+
+        if(userEntity.isPresent()){
+            var user = userEntity.get();
+
+            //ao fazer essas verificações ele não altera campos que eu não atualizei (null)
+            if(updateUserDTO.username() != null){
+                user.setUsername(updateUserDTO.username());
+            }
+
+            if(updateUserDTO.password() != null){
+                user.setPassword(updateUserDTO.password());
+            }
+
+            userRepository.save(user);
+        }
     }
 
     public void deleteById(String userId) {
