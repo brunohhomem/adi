@@ -17,6 +17,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
@@ -55,7 +56,29 @@ class UserServiceTest {
 
             //Assert
             assertNotNull(output);
+        }
 
+        @Test
+        @DisplayName("Should throw exception when error occurs!")
+        void shouldThrowExceptionWhenErrorOccurs(){
+
+            //Arrange
+            var user = new User(
+                    UUID.randomUUID(),
+                    "username",
+                    "email@email.com",
+                    "password123",
+                    Instant.now(),
+                    null);
+            doThrow(new RuntimeException()).when(userRepository).save(any());
+
+            var input = new CreateUserDTO(
+                    "username",
+                    "email@email.com",
+                    "password123");
+
+            //Act & Assert
+            assertThrows(RuntimeException.class, () -> userService.createUser(input));
         }
     }
 }
