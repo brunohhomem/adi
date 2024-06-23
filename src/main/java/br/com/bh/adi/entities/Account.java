@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -29,4 +30,7 @@ public class Account {
     @OneToOne(mappedBy = "account")
     @PrimaryKeyJoinColumn //indica pro hibernate que esse relacionamento força o Id dessa entidade ser FK na outra
     private BillingAddress billingAddress;
+
+    @OneToMany(mappedBy = "account")
+    private List<AccountStock> accountStocks;
 }
