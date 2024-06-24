@@ -1,9 +1,10 @@
 package br.com.bh.adi.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,7 +16,6 @@ import java.util.UUID;
 @Entity
 @Table(name = "tb_users")
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
     @Id
@@ -39,4 +39,13 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Account> accounts;
+
+    public User(UUID userId, String username, String email, String password, Instant creationTimestamp, Instant updateTimestamp) {
+        this.userId = userId;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.creationTimestamp = creationTimestamp;
+        this.updateTimestamp = updateTimestamp;
+    }
 }

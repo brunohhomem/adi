@@ -20,9 +20,9 @@ public class UserService {
 
     public UUID createUser(CreateUserDTO createUserDTO){
 
-        //DTO -> Entity
+        // DTO -> ENTITY
         var entity = new User(
-                null,
+                UUID.randomUUID(),
                 createUserDTO.username(),
                 createUserDTO.email(),
                 createUserDTO.password(),
@@ -30,6 +30,7 @@ public class UserService {
                 null);
 
         var userSaved = userRepository.save(entity);
+
         return userSaved.getUserId();
     }
 
