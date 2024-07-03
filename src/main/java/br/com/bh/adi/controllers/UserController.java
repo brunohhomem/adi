@@ -1,5 +1,8 @@
 package br.com.bh.adi.controllers;
 
+import br.com.bh.adi.controllers.dto.CreateAccountDTO;
+import br.com.bh.adi.controllers.dto.CreateUserDTO;
+import br.com.bh.adi.controllers.dto.UpdateUserDTO;
 import br.com.bh.adi.entities.User;
 import br.com.bh.adi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/v1/users")
 public class UserController {
 
     @Autowired
@@ -54,5 +57,12 @@ public class UserController {
         userService.deleteById(userId);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{userId}/accounts")
+    public ResponseEntity<Void> deleteById(@PathVariable String userId, @RequestBody CreateAccountDTO createAccountDTO){
+        userService.createAccount(userId, createAccountDTO);
+        return ResponseEntity.ok().build();
+    }
+
 
 }

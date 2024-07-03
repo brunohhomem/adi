@@ -1,4 +1,4 @@
-package br.com.bh.adi.controllers;
+package br.com.bh.adi.controllers.dto;
 
 public record CreateUserDTO(String username, String email, String password) {
     //Esse DTO expoe apenas os atributos necessarios para criação de um usuario entidade

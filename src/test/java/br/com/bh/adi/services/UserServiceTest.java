@@ -1,7 +1,7 @@
 package br.com.bh.adi.services;
 
-import br.com.bh.adi.controllers.CreateUserDTO;
-import br.com.bh.adi.controllers.UpdateUserDTO;
+import br.com.bh.adi.controllers.dto.CreateUserDTO;
+import br.com.bh.adi.controllers.dto.UpdateUserDTO;
 import br.com.bh.adi.entities.User;
 import br.com.bh.adi.repositories.UserRepository;
 import org.junit.jupiter.api.DisplayName;
